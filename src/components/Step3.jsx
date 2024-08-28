@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-const Step3 = ({ designData, onFinalize }) => {
+const Step3 = ({ designData, onFinalize, cartCount, onCartUpdate }) => {
     const [billingInfo, setBillingInfo] = useState('');
     const [shippingAddress, setShippingAddress] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Process the payment details
         onFinalize({ billingInfo, shippingAddress, paymentMethod });
+        onCartUpdate(); // Update the cart count when placing the order
     };
 
     return (
@@ -51,7 +51,10 @@ const Step3 = ({ designData, onFinalize }) => {
                     </select>
                 </div>
 
-                <button className="w-full py-2 bg-teal-500 text-white rounded-full hover:bg-teal-600 transition duration-300">
+                <button
+                    type="submit"
+                    className="w-full py-2 bg-teal-500 text-white rounded-full hover:bg-teal-600 transition duration-300"
+                >
                     Place Order
                 </button>
             </form>
